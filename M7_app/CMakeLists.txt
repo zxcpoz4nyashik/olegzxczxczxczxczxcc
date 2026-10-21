@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.16)
+project(Orders LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
+add_executable(Orders WIN32 main.cpp)
+target_link_libraries(Orders Qt6::Widgets Qt6::Sql)
+# кириллица в строках: MinGW читает исходник как UTF-8 сам, MSVC — только с /utf-8
+if(MSVC)
+    target_compile_options(Orders PRIVATE /utf-8)
+endif()
